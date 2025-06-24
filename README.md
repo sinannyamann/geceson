@@ -1,6 +1,3 @@
-# geceson
-railway
-// GecexCore - Advanced Microservices Platform
 const express = require('express');
 const EventEmitter = require('events');
 const axios = require('axios');
@@ -13,7 +10,7 @@ class GecexCore extends EventEmitter {
     this.services = new Map();
     this.middleware = [];
     this.config = {
-      port: process.env.GECEX_PORT || 4000,
+      port: process.env.PORT || process.env.GECEX_PORT || 4000, // Use Railway's PORT
       environment: process.env.NODE_ENV || 'development',
       logLevel: process.env.LOG_LEVEL || 'info',
       enableMetrics: true,
@@ -454,3 +451,7 @@ class GecexCore extends EventEmitter {
 }
 
 module.exports = GecexCore;
+
+// Start the server
+const core = new GecexCore();
+core.start();
